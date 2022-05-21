@@ -25,6 +25,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
+
 @Getter
 public final class ExpressHub extends JavaPlugin {
 
@@ -67,14 +69,16 @@ public final class ExpressHub extends JavaPlugin {
 
         // We are going to use helper to disable certain events.
 
-        Events.subscribe(BlockBreakEvent.class).handler(e -> e.setCancelled(true));
-        Events.subscribe(BlockPlaceEvent.class).handler(e -> e.setCancelled(true));
-        Events.subscribe(FoodLevelChangeEvent.class).handler(e -> e.setCancelled(true));
-        Events.subscribe(EntityDamageEvent.class).handler(e -> e.setCancelled(true));
         Events.subscribe(EntitySpawnEvent.class).filter(e -> !(e.getEntity() instanceof Player)).handler(e -> e.setCancelled(true));
         Events.subscribe(PlayerQuitEvent.class).handler(e -> e.setQuitMessage(null));
-        Events.subscribe(PlayerDropItemEvent.class).handler(e -> e.setCancelled(true));
-        Events.subscribe(InventoryClickEvent.class).handler(e -> e.setCancelled(true));
+
+        Arrays.asList(BlockBreakEvent.class,
+                BlockPlaceEvent.class,
+                FoodLevelChangeEvent.class,
+                EntityDamageEvent.class,
+                PlayerDropItemEvent.class,
+                InventoryClickEvent.class)
+                .forEach(event -> Events.subscribe(event).handler(e -> e.setCancelled(true)));
 
         // Now we are going to setup players inventory, gamemode, and health.
 
