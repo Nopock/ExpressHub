@@ -1,0 +1,4 @@
+name: ExpressHub
+version: '${project.version}'
+main: me.nopox.expresshub.ExpressHub
+api-version: 1.16
