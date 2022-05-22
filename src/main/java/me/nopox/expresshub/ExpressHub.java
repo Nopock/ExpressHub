@@ -1,10 +1,12 @@
 package me.nopox.expresshub;
 
+import co.aikar.commands.PaperCommandManager;
 import io.github.nosequel.tab.shared.TabHandler;
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
 import lombok.Getter;
 import me.lucko.helper.Events;
+import me.nopox.expresshub.commands.OwnerCommands;
 import me.nopox.expresshub.enderbutt.EnderButtListener;
 import me.nopox.expresshub.hideplayers.ShowHidePlayersListener;
 import me.nopox.expresshub.scoreboard.Scoreboard;
@@ -54,6 +56,9 @@ public final class ExpressHub extends JavaPlugin {
         assemble.setAssembleStyle(AssembleStyle.VIPER);
 
         new TabHandler(new me.nopox.expresshub.tab.TabHandler(this), this, 20L);
+
+        PaperCommandManager manager = new PaperCommandManager(this);
+        manager.registerCommand(new OwnerCommands());
 
 
     }
