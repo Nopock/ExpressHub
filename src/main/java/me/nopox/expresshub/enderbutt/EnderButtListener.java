@@ -25,13 +25,8 @@ public class EnderButtListener implements Listener {
 
     @EventHandler
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
-        if (!(event.getEntity() instanceof EnderPearl)) {
-            return;
-        }
-
-        if (!(event.getEntity().getShooter() instanceof Player)) {
-            return;
-        }
+        if (event.getEntity() instanceof EnderPearl) return;
+        if (!(event.getEntity().getShooter() instanceof Player)) return;
 
         Player player = (Player) event.getEntity().getShooter();
         EnderPearl enderPearl = (EnderPearl) event.getEntity();
@@ -43,7 +38,7 @@ public class EnderButtListener implements Listener {
         }
 
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> player.getInventory().setItem(plugin.getConfig().getInt("Inventory.Enderbutt.slot"), plugin.getItems().getEnderbutt()), 5L);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> player.getInventory().setItem(plugin.getConfig().getInt("Inventory.Enderbutt.slot"), plugin.getItems().getEnderbutt()), 5L);
 
         player.spigot().setCollidesWithEntities(false);
         enderPearl.setPassenger(player);
