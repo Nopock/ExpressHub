@@ -21,6 +21,6 @@ public class ServerSelectorListener implements Listener {
 
         if (event.getItem() == null || event.getItem() != plugin.getItems().getServer_selector()) return;
 
-        new ServerSelector(event.getPlayer());
+        new ServerSelector(event.getPlayer(), plugin);
     }
 }

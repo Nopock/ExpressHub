@@ -58,7 +58,7 @@ public final class ExpressHub extends JavaPlugin {
         new TabHandler(new me.nopox.expresshub.tab.TabHandler(this), this, 20L);
 
         PaperCommandManager manager = new PaperCommandManager(this);
-        manager.registerCommand(new OwnerCommands());
+        manager.registerCommand(new OwnerCommands(this));
 
 
     }
@@ -90,7 +90,7 @@ public final class ExpressHub extends JavaPlugin {
         Events.subscribe(PlayerJoinEvent.class).handler(e -> setupJoinStuff(e.getPlayer()));
 
         if (getConfig().getBoolean("Inventory.Enderbutt.enabled")) {
-            getServer().getPluginManager().registerEvents(new EnderButtListener(), this);
+            new EnderButtListener(this);
         }
         if (getConfig().getBoolean("Inventory.Show_Players.enabled")) {
             new ShowHidePlayersListener(this);

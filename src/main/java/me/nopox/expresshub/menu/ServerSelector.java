@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class ServerSelector extends Menu {
-    ExpressHub plugin = new ExpressHub();
+    private ExpressHub plugin;
     FileConfiguration config = plugin.getConfig();
 
     /**
@@ -17,9 +17,11 @@ public class ServerSelector extends Menu {
      *
      * @param player the player to create the menu for
      */
-    public ServerSelector(Player player) {
+    public ServerSelector(Player player, ExpressHub plugin) {
         super(player, "&e&lServer Selector << Main", 27);
+        this.plugin = plugin;
     }
+
 
     /**
      * The method to get the buttons for the current inventory tick

@@ -15,7 +15,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class EnderButtListener implements Listener {
 
-    private final ExpressHub plugin = new ExpressHub();
+    private final ExpressHub plugin;
+
+    public EnderButtListener(ExpressHub plugin) {
+        this.plugin = plugin;
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    }
 
 
     @EventHandler
