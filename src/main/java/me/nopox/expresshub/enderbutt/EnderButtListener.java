@@ -15,16 +15,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class EnderButtListener implements Listener {
 
-    private final ExpressHub plugin;
-
-    public EnderButtListener(ExpressHub plugin) {
-        this.plugin = plugin;
-        plugin.getServer().getPluginManager().registerEvents(this, plugin);
+    public EnderButtListener() {
+        ExpressHub.getInstance().getServer().getPluginManager().registerEvents(this, ExpressHub.getInstance());
     }
 
 
     @EventHandler
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
+        ExpressHub plugin = ExpressHub.getInstance();
         if (event.getEntity() instanceof EnderPearl) return;
         if (!(event.getEntity().getShooter() instanceof Player)) return;
 

@@ -15,25 +15,25 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 public class ShowHidePlayersListener implements Listener {
 
-    private final ExpressHub plugin;
 
-    public ShowHidePlayersListener(ExpressHub plugin) {
-        this.plugin = plugin;
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+    public ShowHidePlayersListener() {
+        Bukkit.getPluginManager().registerEvents(this, ExpressHub.getInstance());
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        Bukkit.getOnlinePlayers().stream().filter(p -> p.hasMetadata("hidden")).forEach(s -> s.hidePlayer(plugin, player));
+        Bukkit.getOnlinePlayers().stream().filter(p -> p.hasMetadata("hidden")).forEach(s -> s.hidePlayer(ExpressHub.getInstance(), player));
     }
 
 
     @EventHandler
     public void playerInteractEvent(PlayerInteractEvent event) {
+        ExpressHub plugin = ExpressHub.getInstance();
+
         Player player = event.getPlayer();
         ItemStack held = player.getInventory().getItemInMainHand();
-        if (!(event.getAction() == Action.RIGHT_CLICK_AIR) || event.getAction() == Action.RIGHT_CLICK_BLOCK) return;
+        if (!(event.getAction() == Action.RIGHT_CLICK_AIR) || !(event.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
         if (!(held == plugin.getItems().getHide_players()) || !(held == plugin.getItems().getShow_players())) return;
 
         if (player.hasMetadata("hidden")) {

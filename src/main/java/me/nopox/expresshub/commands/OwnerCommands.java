@@ -12,15 +12,9 @@ import org.bukkit.entity.Player;
 @CommandPermission("expresshub.admin")
 public class OwnerCommands extends BaseCommand {
 
-    private final ExpressHub plugin;
-
-    public OwnerCommands(ExpressHub plugin) {
-        this.plugin = plugin;
-    }
-
     @CommandAlias("reload")
     public void onReload(Player sender) {
-        plugin.reloadConfig();
+        ExpressHub.getInstance().reloadConfig();
         sender.sendMessage("§aConfig reloaded!");
     }
 

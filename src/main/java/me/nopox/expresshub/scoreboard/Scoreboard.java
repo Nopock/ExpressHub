@@ -12,12 +12,10 @@ import java.util.List;
 
 public class Scoreboard implements AssembleAdapter {
 
-    private ExpressHub plugin;
     private FileConfiguration config;
 
-    public Scoreboard(ExpressHub plugin) {
-        this.plugin = plugin;
-        this.config = plugin.getConfig();
+    public Scoreboard() {
+        this.config = ExpressHub.getInstance().getConfig();
     }
 
     /**

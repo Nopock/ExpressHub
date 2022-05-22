@@ -6,11 +6,11 @@ import org.bukkit.entity.Player;
 
 public class MessageUtil {
     private FileConfiguration config;
-    public MessageUtil(ExpressHub plugin) {
-        this.config = plugin.getConfig();
-    }
+
 
     public void sendMOTD(Player player) {
+
+        config = ExpressHub.getInstance().getConfig();
 
         for (String line : config.getStringList("MOTD")) {
             player.sendMessage(CC.translate(line));

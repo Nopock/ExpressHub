@@ -11,16 +11,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public class InventoryUtil {
-
-    private ExpressHub plugin;
     private FileConfiguration config;
 
-    public InventoryUtil(ExpressHub plugin) {
-        this.plugin = plugin;
-        this.config = plugin.getConfig();
-    }
 
     public void setupInventory(Player p) {
+        config = ExpressHub.getInstance().getConfig();
+        ExpressHub plugin = ExpressHub.getInstance();
         Inventory inv = p.getInventory();
 
         inv.clear();

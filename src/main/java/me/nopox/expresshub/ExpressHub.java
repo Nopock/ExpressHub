@@ -33,6 +33,8 @@ import java.util.Arrays;
 @Getter
 public final class ExpressHub extends JavaPlugin {
 
+    @Getter private static ExpressHub instance;
+
     private InventoryUtil inventoryUtil;
     private MessageUtil messageUtil;
     private Items items;
@@ -42,13 +44,14 @@ public final class ExpressHub extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
+        instance = this;
         setupListeners();
 
-        inventoryUtil = new InventoryUtil(this);
-        messageUtil = new MessageUtil(this);
-        items = new Items(this);
+        inventoryUtil = new InventoryUtil();
+        messageUtil = new MessageUtil();
+        items = new Items();
 
-        Assemble assemble = new Assemble(this, new Scoreboard(this));
+        Assemble assemble = new Assemble(this, new Scoreboard());
 
         // Set Interval (Tip: 20 ticks = 1 second).
         assemble.setTicks(2);
@@ -56,10 +59,10 @@ public final class ExpressHub extends JavaPlugin {
         // Set Style (Tip: Viper Style starts at -1 and goes down).
         assemble.setAssembleStyle(AssembleStyle.VIPER);
 
-        new TabHandler(new me.nopox.expresshub.tab.TabHandler(this), this, 20L);
+        new TabHandler(new me.nopox.expresshub.tab.TabHandler(), this, 20L);
 
         PaperCommandManager manager = new PaperCommandManager(this);
-        manager.registerCommand(new OwnerCommands(this));
+        manager.registerCommand(new OwnerCommands());
 
         new MenuHandler(this);
 
@@ -90,25 +93,25 @@ public final class ExpressHub extends JavaPlugin {
 
         // Now we are going to setup players inventory, gamemode, and health.
 
-        Events.subscribe(PlayerJoinEvent.class).handler(e -> setupJoinStuff(e.getPlayer()));
+        Events.subscribe(PlayerJoinEvent.class).handler(e ->
+                setupJoinStuff(e.getPlayer(), e));
 
-        if (getConfig().getBoolean("Inventory.Enderbutt.enabled")) {
-            new EnderButtListener(this);
-        }
-        if (getConfig().getBoolean("Inventory.Show_Players.enabled")) {
-            new ShowHidePlayersListener(this);
-        }
-        if (getConfig().getBoolean("Inventory.Server_Selector.enabled")) {
-            new ServerSelectorListener(this);
-        }
+        getServer().getPluginManager().registerEvents(new ServerSelectorListener(), this);
+
+        getServer().getPluginManager().registerEvents(new ShowHidePlayersListener(), this);
+
+        getServer().getPluginManager().registerEvents(new EnderButtListener(), this);
+
     }
 
-    private void setupJoinStuff(Player player) {
+    private void setupJoinStuff(Player player, PlayerJoinEvent e) {
         player.setGameMode(GameMode.ADVENTURE);
         player.setHealth(20);
         player.setFoodLevel(20);
         getInventoryUtil().setupInventory(player);
         getMessageUtil().sendMOTD(player);
+        e.setJoinMessage(null);
+
     }
 
 }
