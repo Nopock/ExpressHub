@@ -9,21 +9,22 @@ import org.bukkit.inventory.ItemStack;
 @Getter
 public class Items {
     private ExpressHub plugin;
+    private FileConfiguration config;
 
     public Items(ExpressHub plugin) {
         this.plugin = plugin;
+        this.config = plugin.getConfig();
     }
 
-    FileConfiguration config = plugin.getConfig();
 
 
-    private ItemStack enderbutt = getItem("Enderbutt");
-    private ItemStack server_selector = getItem("Server_Selector");
-    private ItemStack show_players = getItem("Show_Players");
-    private ItemStack hide_players = getItem("Hide_Players");
-    private ItemStack item_1 = getItem("Item_1");
-    private ItemStack item_2 = getItem("Item_2");
-    private ItemStack item_3 = getItem("Item_3");
+    private final ItemStack enderbutt = getItem("Enderbutt");
+    private final ItemStack server_selector = getItem("Server_Selector");
+    private final ItemStack show_players = getItem("Show_Players");
+    private final ItemStack hide_players = getItem("Hide_Players");
+    private final ItemStack item_1 = getItem("Item_1");
+    private final ItemStack item_2 = getItem("Item_2");
+    private final ItemStack item_3 = getItem("Item_3");
 
 
     private ItemStack getItem(String id) {

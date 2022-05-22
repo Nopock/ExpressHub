@@ -13,15 +13,15 @@ import java.util.List;
 public class InventoryUtil {
 
     private ExpressHub plugin;
+    private FileConfiguration config;
 
     public InventoryUtil(ExpressHub plugin) {
         this.plugin = plugin;
+        this.config = plugin.getConfig();
     }
 
     public void setupInventory(Player p) {
         Inventory inv = p.getInventory();
-
-        FileConfiguration config = plugin.getConfig();
 
         inv.clear();
 
@@ -37,10 +37,6 @@ public class InventoryUtil {
         if (config.getBoolean("Inventory.Show_Players.enabled")) {
             inv.setItem(config.getInt("Inventory.Show_Players.slot"), plugin.getItems().getShow_players());
         }
-
-
-
-
     }
 
 

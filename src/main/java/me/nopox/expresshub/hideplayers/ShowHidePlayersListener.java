@@ -15,7 +15,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 
 public class ShowHidePlayersListener implements Listener {
 
-    private ExpressHub plugin;
+    private final ExpressHub plugin;
 
     public ShowHidePlayersListener(ExpressHub plugin) {
         this.plugin = plugin;

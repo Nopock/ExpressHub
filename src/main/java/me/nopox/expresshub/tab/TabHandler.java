@@ -12,9 +12,11 @@ import java.util.List;
 
 public class TabHandler implements TabElementHandler {
     private final ExpressHub plugin;
+    private FileConfiguration config;
 
     public TabHandler(ExpressHub plugin) {
         this.plugin = plugin;
+        this.config = plugin.getConfig();
     }
     /**
      * Get the tab element of a player
@@ -25,8 +27,6 @@ public class TabHandler implements TabElementHandler {
 
     @Override
     public TabElement getElement(Player player) {
-        FileConfiguration config = plugin.getConfig();
-
         TabElement e = new TabElement();
         e.setHeader(CC.translate(config.getString("Tablist.header")));
         e.setFooter(CC.translate(config.getString("Tablist.footer")));
