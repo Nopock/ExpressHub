@@ -1,6 +1,7 @@
 package me.nopox.expresshub;
 
 import co.aikar.commands.PaperCommandManager;
+import io.github.nosequel.menu.MenuHandler;
 import io.github.nosequel.tab.shared.TabHandler;
 import io.github.thatkawaiisam.assemble.Assemble;
 import io.github.thatkawaiisam.assemble.AssembleStyle;
@@ -59,6 +60,8 @@ public final class ExpressHub extends JavaPlugin {
 
         PaperCommandManager manager = new PaperCommandManager(this);
         manager.registerCommand(new OwnerCommands(this));
+
+        new MenuHandler(this);
 
 
     }
